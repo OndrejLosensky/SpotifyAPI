@@ -1,4 +1,15 @@
     document.addEventListener("DOMContentLoaded", function() {
+
+        const logo = document.getElementById('logo');
+
+        // Add click event to the logo for refreshing the page
+        if (logo) {
+            logo.addEventListener('click', function () {
+                location.reload();
+            });
+        }
+    
+
     // Replace 'YOUR_ACCESS_TOKEN' with your actual access token
     let accessToken = 'BQBkRVRtpoGshoARj9nov8ujejBva6LRAyAmINd1W0WXeuXU_AqN_ToF71hdM75WIjyKCtUE5mtJWJ1SX2s_bysmyiAUNdu0piJ-M0In63lpPnzkaq1K3YcKnHk';
 
@@ -8,6 +19,7 @@
 
     const artistInput = document.getElementById('artist-input');
     const searchButton = document.getElementById('search-button');
+    
 
     // Add event listener for keypress on the input field
     artistInput.addEventListener('keypress', function(event) {
@@ -21,11 +33,19 @@
         performSearch();
     });
 
+    const defaultArtistDescription = document.getElementById('default-artist-description');
+    const artistDescriptionText = document.getElementById('artist-description-text');
+
     // Function to perform the search
     function performSearch() {
         const artistName = artistInput.value.trim();
 
         if (artistName) {
+            // Hide the default artist description
+            if (defaultArtistDescription) {
+                defaultArtistDescription.style.display = 'none';
+            }
+
             // Call the function to fetch top tracks for the searched artist
             fetchTopTracksForArtistByName(artistName);
         } else {

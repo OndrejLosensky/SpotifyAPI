@@ -1,6 +1,29 @@
 document.addEventListener("DOMContentLoaded", function() {
     let accessToken = 'BQChTAYRPV8iKaJ2k69lp3mKky8x9TzjWh8svIfowqhGtcKs8mAXbL5V7KR2dd5Db0ljYVzPkB4mbzHASdFP5V384qQu_XF-3eWQCvWJLgkWT6j-vFDyS1tLH-E';
 
+     // Function to fetch artist details including description and followers
+     function fetchArtistDetails(artistId) {
+        fetch(`https://api.spotify.com/v1/artists/${artistId}`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Update the HTML with artist description and followers
+            const artistDescription = document.getElementById('artist-description-text');
+            const artistFollowers = document.getElementById('artist-followers');
+
+            if (artistDescription && artistFollowers) {
+                artistDescription.textContent = `Description: ${data.genres.join(', ')}`;
+                artistFollowers.textContent = `Followers: ${data.followers.total}`;
+            }
+        })
+        .catch(error => {
+            console.error(`Error fetching artist details for artist ${artistId}:`, error);
+        });
+    }
+
     // Function to refresh the access token
     function refreshAccessToken() {
         // Your logic to refresh the access token
