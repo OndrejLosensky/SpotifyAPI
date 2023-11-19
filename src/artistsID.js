@@ -9,9 +9,20 @@
     const artistInput = document.getElementById('artist-input');
     const searchButton = document.getElementById('search-button');
 
-    
+    // Add event listener for keypress on the input field
+    artistInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            performSearch();
+        }
+    });
 
+    // Add event listener for click on the search button
     searchButton.addEventListener('click', function() {
+        performSearch();
+    });
+
+    // Function to perform the search
+    function performSearch() {
         const artistName = artistInput.value.trim();
 
         if (artistName) {
@@ -19,9 +30,8 @@
             fetchTopTracksForArtistByName(artistName);
         } else {
             console.log('Please enter an artist name.');
-            alert("Please enter name of the artist")
         }
-    });
+    }
 
     // Function to fetch top tracks for a specific artist by name
     function fetchTopTracksForArtistByName(artistName) {
@@ -106,10 +116,14 @@
         tracks.forEach(track => {
             const trackInfo = document.createElement('div');
             trackInfo.classList.add('track-info');
+            
 
-            // Create HTML elements to display track information
             const trackName = document.createElement('h2');
-            trackName.textContent = track.name;
+            const trackLink = document.createElement('a'); // Add this line
+            trackLink.href = track.external_urls.spotify; // Add this line
+            trackLink.target = '_blank'; // Open link in a new tab
+            trackLink.textContent = track.name; // Add this line
+            trackName.appendChild(trackLink); // Add this line
 
             const artists = document.createElement('p');
             artists.textContent = `Artists: ${track.artists ? track.artists.map(artist => artist.name).join(', ') : 'N/A'}`;
@@ -128,7 +142,7 @@
 
             // Duration
             const duration = document.createElement('p');
-            duration.textContent = `Duration: ${msToMinSec(track.duration_ms)}`;
+            duration.textContent = `Duration: ${msToMinSec(track.duration_ms)}s`;
 
             // Append elements to the container
             trackInfo.appendChild(trackName);
