@@ -248,7 +248,11 @@ a {
     .track-info {
         max-width: 100%; /* Ensure the card takes full width */
     }
+
+    
 }
+
+
 
 .message {
     padding-top: 50px;
