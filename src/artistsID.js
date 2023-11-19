@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const clientId = '293dcee6ecde4116bb53b61373415d40';
     const clientSecret = 'd0f053c0b4ec4f25874cf95cb2a952b6';
   
-    let accessToken = 'BQBme6YTzLDgWDZGLdNzwN8men4zpJB4ByYZIWoQKZm8plP94LYAHi9vEjkTF9n1gOmJqKliYQhrbxvAKxAFG94CEvh7kI2SifyxX8p8mg3FxgbHLASPn2Xxk7E';
+    let accessToken = 'BQAhKQmDue83cBhkDoI5j0MGoni_KNwWsUSp6NYdmsPfiastdsswo9lANycTqnHRWeF7Ih7v3HoU2tE9NlxbabzwhomTx_AQkhWykraCbNcaHEeEEfmZR2Pbkts';
   
     const artistInput = document.getElementById('artist-input');
     const searchButton = document.getElementById('search-button');
@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
         fetchTopTracksForArtistByName(artistName);
       } else {
         console.log('Please enter an artist name.');
+        //alert('Please enter an artist name.');
       }
     }
   
@@ -62,10 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
             fetchTopTracksForArtist(artistId);
           } else {
             console.error(`No artist found for the query: ${artistName}`);
+            //alert(`No artist found for the query: ${artistName}`)
           }
         })
         .catch(error => {
           console.error(`Error searching for artist ${artistName}:`, error);
+          //alert(`Error searching for artist ${artistName}`)
         });
     }
   

@@ -304,3 +304,7 @@ h3 {
     background-size: 25px 25px; /* Set the size of the gap between dots */
     background-image: radial-gradient(circle, rgba(0, 0, 0, 0.19) 1px, transparent 1px); /* Define dot pattern */
 }
+
+.linkToPage {
+    color: #f4f4f4;
+}
