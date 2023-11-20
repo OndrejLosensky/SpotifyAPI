@@ -150,6 +150,9 @@ document.addEventListener("DOMContentLoaded", function () {
   
         const popularity = document.createElement('p');
         popularity.textContent = `Popularity: ${track.popularity}`;
+
+        const releaseDate = document.createElement('p');
+        releaseDate.textContent = `Release Date: ${track.album ? track.album.release_date : 'N/A'}`;
   
         // Image
         const image = document.createElement('img');
@@ -166,6 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
         trackInfo.appendChild(album);
         trackInfo.appendChild(popularity);
         trackInfo.appendChild(duration);
+        trackInfo.appendChild(releaseDate);
         trackInfo.appendChild(image);
   
         // Append the track info container to the main container
