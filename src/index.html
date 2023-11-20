@@ -16,7 +16,25 @@
             <button id="search-button"> Search </button>
         </div>
 
-        <a class="linkToPage" href="/src/topArtists.html"> Top artists </a>
+        <ul class="navLinks">
+            <li> <a class="linkToPage" href="/src/topArtists.html"> Top artists </a> </li>
+            <li> <a class="linkToPage" href=""> Playlist songs </a> </li>
+            <li> <a class="linkToPage" href=""> Top songs </a> </li>
+            <li> <a class="linkToPage" href=""> Top albums </a> </li>
+        </ul>
+
+        
+    </div>
+
+    <div class="bg-dots" id="default-content">
+        <h1>Welcome to SpotifyAPI</h1>
+        <p>You can explore most popular songs of your favorite artists <br> 
+            Then you can also check out the most popular artist in the world in this week or month <br> 
+            Or most played songs and albums worldwide.</p>
+
+        <p> This project is Open-source and you can find it on my Github linked <a class="githubLink" href="https://github.com/OndrejLosensky"> here.</a> </p>
+
+        <img src="/assets/Spotify_Logo_RGB_White.png" class="Main-logo" alt="welcome logo">
     </div>
 
        <!-- 
@@ -34,6 +52,13 @@
 
         
     <div class="container bg-dots">
+        <!-- 
+        <button id="display-options-button">Display Options</button>
+        <select id="display-option">
+          <option value="large-cards">Large Cards</option>
+          <option value="small-cards">Small Cards</option>
+        </select>
+        -->
         <div id="tracks-container">
         </div>
     </div>
@@ -41,7 +66,7 @@
     <script src="artistsID.js"></script>
 
     <footer> 
-        <p>&copy; 2023 Losenský Ondřej | All rights reserved.</p>    
+        <p> Powered by <span> SpotifyAPI</span> | &copy; 2023 Losenský Ondřej | All rights reserved.</p>    
     </footer>
 </body>
 </html>
