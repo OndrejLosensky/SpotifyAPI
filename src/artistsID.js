@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const clientId = '293dcee6ecde4116bb53b61373415d40';
     const clientSecret = 'd0f053c0b4ec4f25874cf95cb2a952b6';
   
-    let accessToken = 'BQBme6YTzLDgWDZGLdNzwN8men4zpJB4ByYZIWoQKZm8plP94LYAHi9vEjkTF9n1gOmJqKliYQhrbxvAKxAFG94CEvh7kI2SifyxX8p8mg3FxgbHLASPn2Xxk7E';
+    let accessToken = 'BQA5F_Z6IITjoqOUvp2u7IUMITo6PUHY02D4rk-uFJ4BMB1lr96ifEYqMKo2x6JEW60YGEi0Wxigs4c5IxprrUxt6Fthmv-Ie9BcYWpFV086v7bMLYRUroZJYxg';
   
     const artistInput = document.getElementById('artist-input');
     const searchButton = document.getElementById('search-button');
