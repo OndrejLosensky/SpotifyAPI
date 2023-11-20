@@ -58,24 +58,22 @@ document.addEventListener("DOMContentLoaded", function () {
       })
           .then(response => response.json())
           .then(data => {
-              console.log('Search API response:', data);
-              // Inside the fetchTopTracksForArtistByName function
-              if (data.artists && data.artists.items && data.artists.items.length > 0) {
+            console.log('Search API response:', data);
+            if (data.artists && data.artists.items && data.artists.items.length > 0) {
                 const artistId = data.artists.items[0].id;
+                console.log('Artist ID:', artistId); // Add this line
                 // Call the function to fetch top tracks for the found artist
                 fetchTopTracksForArtist(artistId);
-              } else {
+            } else {
                 console.error(`No artist found for the query: ${artistName}`);
-                // You can display a message to the user or handle it in another way
-              }
+            }
           })
           .catch(error => {
               console.error(`Error searching for artist ${artistName}:`, error);
           });
   }
 
-    // Initial request for top tracks for a specific artist
-  const artistId = ''; // Remove the hardcoded artist ID
+  const artistId = '0L8ExT028jH3ddEcZwqJJ5'; // Replace with a valid artist ID
   fetchTopTracksForArtist(artistId);
   // Function to refresh the access token
   function refreshAccessToken() {
