@@ -347,3 +347,27 @@ footer span {
     color: rgb(255, 0, 0);
     text-decoration: underline;
 }
+
+.small-card {
+    width: 200px;
+    height: 260px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+.display-options {
+    padding-left: 120px;
+    padding-top: 42px;
+}
+
+#display-option {
+    padding: 8px;
+    margin-left: 10px;
+    background-color: #1db954;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
