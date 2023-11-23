@@ -9,7 +9,6 @@
 <body>
     <div class="header"> 
         <img id="logo" src="/assets/SpotifyAPI_Logo.png" alt="">
-        <h3 id="chosen-artist"></h3>
 
         <div class="search-artist">
             <input type="text" id="artist-input" placeholder="Search an artist">
@@ -68,11 +67,11 @@
 
         
     <div class="container bg-dots">
-        <h3> Artists most popular tracks</h3>
+        <h3> <span id="chosen-artist"></span>'s most popular tracks</h3>
         <div id="tracks-container">
             <!-- Container for displaying top tracks -->
         </div>
-        <h3> Artists most popular albums</h3>
+        <h3> <span id="chosen-artist"></span>'s most popular albums</h3>
         <div id="albums-container">
             <!-- Container for displaying top albums -->
         </div>
