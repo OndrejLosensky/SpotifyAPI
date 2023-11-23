@@ -337,7 +337,6 @@ h3 {
 
 .navLinks {
     list-style-type: none;
-    display: none;
 }
 
 footer span {
@@ -347,5 +346,19 @@ footer span {
 .githubLink {
     color: rgb(255, 0, 0);
     text-decoration: underline;
+}
+
+.artist-info {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.artist-info img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
 }
 
