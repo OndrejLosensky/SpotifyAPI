@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
     // Fetch access token when the DOM content is loaded
     fetchAccessToken();
+    
   
     function performSearch() {
       const artistName = artistInput.value.trim();
@@ -73,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
           if (defaultContent) {
             defaultContent.style.display = 'none';
         }
+        
   
           // Call the function to fetch top tracks for the searched artist
           fetchTopTracksForArtistByName(artistName);
