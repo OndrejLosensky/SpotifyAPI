@@ -88,7 +88,15 @@ body {
     padding: 30px;
 }
 
-.track-info {
+#albums-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    padding: 30px;
+}
+
+.album-info {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -96,8 +104,17 @@ body {
     text-align: center;
 }
 
+.track-info {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+}
+
 .container {
     display: flex;
+    flex-direction:  column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;

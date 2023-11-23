@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
   
-    // Replace 'YOUR_CLIENT_ID' and 'YOUR_CLIENT_SECRET' with your actual values
     const clientId = '293dcee6ecde4116bb53b61373415d40';
     const clientSecret = 'd0f053c0b4ec4f25874cf95cb2a952b6';
   
@@ -61,27 +60,28 @@ document.addEventListener("DOMContentLoaded", function () {
     
   
     function performSearch() {
-      const artistName = artistInput.value.trim();
-  
-      if (artistName) {
-        
-          // Hide the default artist description
-          if (defaultArtistDescription) {
-              defaultArtistDescription.style.display = 'none';
-          }
-  
-          // Hide the default content
-          if (defaultContent) {
-            defaultContent.style.display = 'none';
+        const artistName = artistInput.value.trim();
+
+        if (artistName) {
+            // Hide the default artist description
+            if (defaultArtistDescription) {
+                defaultArtistDescription.style.display = 'none';
+            }
+
+            // Hide the default content
+            if (defaultContent) {
+                defaultContent.style.display = 'none';
+            }
+
+            // Call the function to fetch top tracks for the searched artist
+            fetchTopTracksForArtistByName(artistName);
+
+            // Call the function to fetch top albums for the searched artist
+            fetchTopAlbumsForArtistByName(artistName);
+        } else {
+            alert('Please enter an artist name.');
         }
-        
-  
-          // Call the function to fetch top tracks for the searched artist
-          fetchTopTracksForArtistByName(artistName);
-      } else {
-          alert('Please enter an artist name.');
-      }
-  }
+    }
   
     // Function to fetch top tracks for a specific artist by name
     function fetchTopTracksForArtistByName(artistName) {
@@ -125,6 +125,46 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error(`Error fetching top tracks for artist ${artistId}:`, error);
             });
     }
+    function fetchTopAlbumsForArtistByName(artistName) {
+        fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(artistName)}&type=artist&limit=1`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.artists && data.artists.items && data.artists.items.length > 0) {
+                    const artistId = data.artists.items[0].id;
+                    // Call the function to fetch top albums for the found artist
+                    fetchTopAlbumsForArtist(artistId);
+                } else {
+                    console.error(`No artist found for the query: ${artistName}`);
+                }
+            })
+            .catch(error => {
+                console.error(`Error searching for artist ${artistName}:`, error);
+            });
+    }
+
+
+    function fetchTopAlbumsForArtist(artistId) {
+        fetch(`https://api.spotify.com/v1/artists/${artistId}/albums?limit=6&country=CZ`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                const topAlbums = data.items;
+                // Handle the data and update the HTML for albums
+                displayTopAlbums(topAlbums);
+            })
+            .catch(error => {
+                console.error(`Error fetching top albums for artist ${artistId}:`, error);
+            });
+    }
+
+    
 
     // Set up token refresh every 30 minutes
     setInterval(fetchAccessToken, 30 * 60 * 1000);
@@ -214,14 +254,56 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   
-    // ... (existing code)
+
+    function displayTopAlbums(albums) {
+        const albumsContainer = document.getElementById('albums-container');
+
+        // Check if the container element is found
+        if (!albumsContainer) {
+            console.error('Error: Albums container not found.');
+            return;
+        }
+
+        // Clear existing content
+        albumsContainer.innerHTML = '';
+
+        // Loop through each album and display its information
+        albums.forEach(album => {
+            const albumInfo = document.createElement('div');
+            albumInfo.classList.add('album-info');
+
+            const albumName = document.createElement('h2');
+            const albumLink = document.createElement('a');
+            albumLink.href = album.external_urls.spotify;
+            albumLink.target = '_blank';
+            albumLink.textContent = album.name;
+            albumName.appendChild(albumLink);
+
+            const releaseDate = document.createElement('p');
+            releaseDate.textContent = `Release Date: ${album.release_date}`;
+
+            const image = document.createElement('img');
+            image.src = album.images.length > 0 ? album.images[0].url : 'placeholder-image.jpg';
+            image.alt = album.name;
+
+            // Append elements to the container
+            albumInfo.appendChild(albumName);
+            albumInfo.appendChild(releaseDate);
+            albumInfo.appendChild(image);
+
+            // Append the album info container to the main container
+            albumsContainer.appendChild(albumInfo);
+        });
+    }
   
-    // Add an event listener for changes in the select element
-    const displayOptionSelect = document.getElementById('display-option');
-    displayOptionSelect.addEventListener('change', function () {
-        displayTracks(); // Call the displayTracks function when the option changes
-    });
-  
+     // Add an event listener for changes in the select element
+     const displayOptionSelect = document.getElementById('display-option');
+     displayOptionSelect.addEventListener('change', function () {
+         displayTracks(); // Call the displayTracks function when the option changes
+         displayTopAlbums(); // Call the displayTopAlbums function when the option changes
+     });
+
+
     // Function to convert milliseconds to minutes and seconds
     function msToMinSec(duration) {
         const minutes = Math.floor(duration / 60000);
