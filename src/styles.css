@@ -336,8 +336,15 @@ h3 {
 }
 
 .navLinks {
-    list-style-type: none;
-}
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  .navLinks li {
+    margin-right: 16px; /* Adjust the spacing between items as needed */
+  }
 
 footer span {
     font-weight: bolder;
