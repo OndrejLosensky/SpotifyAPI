@@ -90,18 +90,23 @@ body {
 
 #albums-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     gap: 20px;
-    max-width: 1200px;
+    max-width: 1600px;
     padding: 30px;
 }
 
 .album-info {
     background-color: #fff;
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 5px;
+    margin: 10px;
+    max-width: calc(250% - 20px);
+    width: 100%;
     text-align: center;
+    box-sizing: border-box;
+    height: 280px;
 }
 
 .track-info {
@@ -143,6 +148,7 @@ body {
     box-sizing: border-box;
     height: 400px;
 }
+
 
 h2 {
     color: #1DB954;
@@ -377,6 +383,8 @@ footer span {
     padding-top: 10px;
     padding-bottom: 0px;
     width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
 
@@ -390,14 +398,16 @@ footer span {
     border: none;
     cursor: pointer;
     border: 1px solid black; 
+
 }
 
 .left {
-    width: 242px;
+    width: 122px;
     padding-top: 10px;
     text-align: right;
 }
 
 .right {
     text-align: left;
+    width: 250x;
 }

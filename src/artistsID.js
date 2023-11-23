@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     function fetchTopAlbumsForArtist(artistId) {
-        fetch(`https://api.spotify.com/v1/artists/${artistId}/albums?limit=6&country=CZ`, {
+        fetch(`https://api.spotify.com/v1/artists/${artistId}/albums?limit=5&country=CZ`, {
             headers: {
                 'Authorization': `Bearer ${accessToken}`
             }
@@ -279,16 +279,12 @@ document.addEventListener("DOMContentLoaded", function () {
             albumLink.textContent = album.name;
             albumName.appendChild(albumLink);
 
-            const releaseDate = document.createElement('p');
-            releaseDate.textContent = `Release Date: ${album.release_date}`;
-
             const image = document.createElement('img');
             image.src = album.images.length > 0 ? album.images[0].url : 'placeholder-image.jpg';
             image.alt = album.name;
 
             // Append elements to the container
             albumInfo.appendChild(albumName);
-            albumInfo.appendChild(releaseDate);
             albumInfo.appendChild(image);
 
             // Append the album info container to the main container
