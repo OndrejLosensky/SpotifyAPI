@@ -190,6 +190,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const trackInfo = document.createElement('div');
         trackInfo.classList.add('track-info');
 
+        const heading = document.createElement('h3');
+        // heading.textContent = "Artists most favorite tracks" –– for displaying heading dynamically at the top of the track info container
+
         if (displayOptionSelect.value === 'small-cards') {
             // this creates CSS class
             trackInfo.classList.add('small-card');
