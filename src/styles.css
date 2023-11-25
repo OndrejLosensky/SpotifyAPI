@@ -410,3 +410,9 @@ footer span {
     text-align: left;
     width: 250x;
 }
+
+
+.image-card {
+    background-color: white;
+    text-align: center;
+}

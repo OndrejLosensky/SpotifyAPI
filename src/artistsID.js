@@ -209,16 +209,29 @@ document.addEventListener("DOMContentLoaded", function () {
             // this basically displays the info in the html container
             trackInfo.appendChild(trackName);
             trackInfo.appendChild(image);
-        } else {
+
+        }
+        else if(displayOptionSelect.value === 'image') {
+            trackInfo.classList.add('image-card');
+
+            
+            const trackName = document.createElement('h2');
+            trackName.textContent = track.name;
+            
+
+            const image = document.createElement('img');
+            image.src = track.album && track.album.images.length > 0 ? track.album.images[0].url : 'placeholder-image.jpg';
+            image.alt = track.name;
+
+            trackInfo.appendChild(image);
+        }
+        else {
               const trackName = document.createElement('h2');
               const trackLink = document.createElement('a');
               trackLink.href = track.external_urls.spotify;
               trackLink.target = '_blank';
               trackLink.textContent = track.name;
               trackName.appendChild(trackLink);
-  
-              const artists = document.createElement('p');
-              artists.textContent = `Artists: ${track.artists ? track.artists.map(artist => artist.name).join(', ') : 'N/A'}`;
 
                 const album = document.createElement('p');
                 album.textContent = `Album: ${track.album ? track.album.name : 'N/A'}`;
@@ -244,7 +257,6 @@ document.addEventListener("DOMContentLoaded", function () {
   
               // Append elements to the container
               trackInfo.appendChild(trackName);
-              trackInfo.appendChild(artists);
               trackInfo.appendChild(album);
               trackInfo.appendChild(popularity);
               trackInfo.appendChild(duration);
