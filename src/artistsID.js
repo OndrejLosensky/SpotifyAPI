@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
     const logo = document.getElementById('logo');
     const defaultContent = document.getElementById('default-content'); // Add this line
-  
+
     // Add click event to the logo for refreshing the page
     if (logo) {
         logo.addEventListener('click', function () {
@@ -272,6 +272,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function displayTopAlbums(albums) {
         const albumsContainer = document.getElementById('albums-container');
+        const chosenArtistHeading = document.getElementById('chosen-artist');
+  
 
         // Check if the container element is found
         if (!albumsContainer) {
@@ -281,6 +283,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Clear existing content
         albumsContainer.innerHTML = '';
+        
+        chosenArtistHeading.textContent = `${tracks[0].artists[0].name}`;
+  
 
         // Loop through each album and display its information
         albums.forEach(album => {
