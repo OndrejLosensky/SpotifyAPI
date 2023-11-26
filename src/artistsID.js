@@ -168,6 +168,84 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Set up token refresh every 30 minutes
     setInterval(fetchAccessToken, 30 * 60 * 1000);
+
+    function fetchTopTracksForArtist(artistId) {
+        fetch(`https://api.spotify.com/v1/artists/${artistId}/top-tracks?country=CZ`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                tracks = data.tracks; // Update the global tracks variable
+                // Call the function to display tracks based on the selected option
+                displayTracks();
+    
+                // Fetch artist information after fetching top tracks
+                fetchArtistInfo(artistId);
+            })
+            .catch(error => {
+                console.error(`Error fetching top tracks for artist ${artistId}:`, error);
+            });
+    }
+    
+    function fetchArtistInfo(artistId) {
+        fetch(`https://api.spotify.com/v1/artists/${artistId}`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Call the function to display artist information
+                displayArtistInfo(data);
+            })
+            .catch(error => {
+                console.error(`Error fetching artist information for artist ${artistId}:`, error);
+            });
+    }
+
+    function displayArtistInfo(artist) {
+        const artistContainer = document.getElementById('artist-container');
+
+       
+    
+        
+        artistContainer.classList.add('artist-display-info');
+        
+        // Check if the container element is found
+        if (!artistContainer) {
+            console.error('Error: Artist container not found.');
+            return;
+        }
+    
+        // Clear existing content
+        artistContainer.innerHTML = '';
+    
+        // Create elements for artist information
+        const artistName = document.createElement('h2');
+        artistName.textContent = `${artist.name}`;
+    
+        const genres = document.createElement('p');
+        genres.textContent = `Genres: ${artist.genres.join(', ')}`;
+    
+        const image = document.createElement('img');
+        image.src = artist.images.length > 0 ? artist.images[0].url : 'placeholder-image.jpg';
+        image.alt = artist.name;
+    
+        const followers = document.createElement('p');
+        followers.textContent = `Followers: ${artist.followers.total}`;
+
+        const latestRelease = document.createElement('p');
+        latestRelease.textContent = "Spiders and webs"
+    
+        // Append elements to the container
+        artistContainer.appendChild(artistName);
+        artistContainer.appendChild(genres);
+        artistContainer.appendChild(image);
+        artistContainer.appendChild(followers);
+        //artistContainer.appendChild(latestRelease);
+    }
   
     function displayTracks() {
       const tracksContainer = document.getElementById('tracks-container');
@@ -190,8 +268,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const trackInfo = document.createElement('div');
         trackInfo.classList.add('track-info');
 
-        const heading = document.createElement('h3');
-        // heading.textContent = "Artists most favorite tracks" –– for displaying heading dynamically at the top of the track info container
 
         if (displayOptionSelect.value === 'small-cards') {
             // this creates CSS class
@@ -206,6 +282,9 @@ document.addEventListener("DOMContentLoaded", function () {
             image.src = track.album && track.album.images.length > 0 ? track.album.images[0].url : 'placeholder-image.jpg';
             image.alt = track.name;
 
+              // Set white-space to nowrap
+            trackName.style.whiteSpace = 'nowrap';
+
             // this basically displays the info in the html container
             trackInfo.appendChild(trackName);
             trackInfo.appendChild(image);
@@ -214,10 +293,13 @@ document.addEventListener("DOMContentLoaded", function () {
         else if(displayOptionSelect.value === 'image') {
             trackInfo.classList.add('image-card');
 
+
             
             const trackName = document.createElement('h2');
             trackName.textContent = track.name;
             
+              // Set white-space to nowrap
+            trackName.style.whiteSpace = 'nowrap';
 
             const image = document.createElement('img');
             image.src = track.album && track.album.images.length > 0 ? track.album.images[0].url : 'placeholder-image.jpg';
@@ -254,6 +336,9 @@ document.addEventListener("DOMContentLoaded", function () {
               // Duration
               const duration = document.createElement('p');
               duration.textContent = `Duration: ${msToMinSec(track.duration_ms)}s`;
+
+                // Set white-space to nowrap
+              trackName.style.whiteSpace = 'nowrap';
   
               // Append elements to the container
               trackInfo.appendChild(trackName);
@@ -303,9 +388,13 @@ document.addEventListener("DOMContentLoaded", function () {
             image.src = album.images.length > 0 ? album.images[0].url : 'placeholder-image.jpg';
             image.alt = album.name;
 
+            //const viewTracksButton = document.createElement('button');
+            //viewTracksButton.textContent = 'View Tracks';
+
             // Append elements to the container
             albumInfo.appendChild(albumName);
             albumInfo.appendChild(image);
+            //albumInfo.appendChild(viewTracksButton);
 
             // Append the album info container to the main container
             albumsContainer.appendChild(albumInfo);
@@ -318,6 +407,12 @@ document.addEventListener("DOMContentLoaded", function () {
          displayTracks(); // Call the displayTracks function when the option changes
          displayTopAlbums(); // Call the displayTopAlbums function when the option changes
      });
+
+
+    function displayLatestTrackReleased(latestRelease) {
+
+        console.log('Latest release:', latestRelease)
+    }
 
 
     // Function to convert milliseconds to minutes and seconds
