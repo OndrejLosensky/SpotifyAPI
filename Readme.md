@@ -1,4 +1,6 @@
-# Display data about artists with SpotifyAPI
+# Spotify web API
+
+### Display data about artists with this simple app
 
 This is unfinished project, where you can display information about artists from Spotify
 
