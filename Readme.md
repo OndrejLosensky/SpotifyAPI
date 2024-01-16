@@ -2,7 +2,7 @@
 
 ### Display data about artists with this simple app
 
-This is unfinished project, where you can display information about artists from Spotify
+This is unfinished project, where you can display information about artists from Spotify. Other links for playlists etc do not work yet. Also I want to re-do it to React.js
 
 Made with plain JavaScript using official SpotifyApi.
 
