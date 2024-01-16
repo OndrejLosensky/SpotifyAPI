@@ -34,8 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
   
-    const clientId = '293dcee6ecde4116bb53b61373415d40';
-    const clientSecret = 'd0f053c0b4ec4f25874cf95cb2a952b6';
+    const clientId = '';
+    const clientSecret = '';
   
     let accessToken = '';
   
